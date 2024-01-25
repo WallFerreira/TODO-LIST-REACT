@@ -16,6 +16,9 @@ textarea {
 
 button {
   cursor: pointer;
+  transition: 0.2s;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 button:hover {
