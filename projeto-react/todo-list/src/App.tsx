@@ -1,24 +1,10 @@
-// import { useState } from "react"
-import { Refs } from "./components/Concepts/Refs"
+import { Memoization } from "./components/Concepts/Memoization"
 import { Header } from "./components/Header/Header"
 import { Tasks } from "./components/Tasks/Tasks"
-// import { Button } from "./components/Button/Button"
 
 import './styles/global.css'
 
 function App() {
-
-  // const [toggle, setToggle] = useState(false)
-
-
-  // useEffect(() => {
-  //   console.log("Executando a função do useEffect...");
-
-  //   return () => {
-  //     console.log("essa função vai ser chamada quando o componente for desmotado");
-
-  //   }
-  // }, [toggle])
 
   return (
     <>
@@ -26,7 +12,7 @@ function App() {
 
       <Tasks />
 
-      <Refs />
+      <Memoization financialData={{ incomes: [50, 30, 20], outcomes: [5, 8, 4] }} />
 
     </>)
 }
