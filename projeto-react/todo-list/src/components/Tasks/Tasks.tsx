@@ -72,7 +72,7 @@ export const Tasks: React.FC = () => {
               />
               <label className={task.done ? styles.done : ''} htmlFor={`task-${task.id}`}>{task.title}
               </label>
-              <button onClick={() => { handleRemoveTask(task.id) }}>X</button>
+              <button onClick={() => { handleRemoveTask(task.id) }}>Remover tarefa</button>
             </li>
           )
         })}
