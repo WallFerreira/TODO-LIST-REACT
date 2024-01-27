@@ -1,20 +1,19 @@
-import { Memoization } from "./components/Concepts/Memoization"
 import { Header } from "./components/Header/Header"
 import { Tasks } from "./components/Tasks/Tasks"
+import { TasksProvider } from "./context/TasksContext"
 
 import './styles/global.css'
 
 function App() {
 
   return (
-    <>
+    <TasksProvider >
       <Header />
-
       <Tasks />
 
-      <Memoization financialData={{ incomes: [50, 30, 20], outcomes: [5, 8, 4] }} />
-
-    </>)
+    </TasksProvider>
+  )
 }
 
 export default App
+

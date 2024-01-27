@@ -1,18 +1,18 @@
 
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import styles from './styles.module.scss'
+import { TasksContext } from '../../context/TasksContext';
 
 
-interface Task {
-  title: string;
-  done: boolean;
-  id: number;
-}
 
 export const Tasks: React.FC = () => {
 
   const [taskTitle, setTaskTitle] = useState("")
-  const [tasks, setTasks] = useState([] as Task[])
+
+  const { tasks, setTasks, handleToggleTaskStatus } = useContext(TasksContext)
+
+  // console.log("Componente Tasks: ", variavel);
+
 
   function handleSubmitAddTask(event: FormEvent) {
     event.preventDefault();
@@ -33,18 +33,15 @@ export const Tasks: React.FC = () => {
     setTaskTitle("")
   }
 
-  useEffect(() => {
-    const tasksOnLocalStorage = localStorage.getItem('tasks')
 
-    if (tasksOnLocalStorage) {
-      setTasks(JSON.parse(tasksOnLocalStorage)) // string para array
-    }
-  }, [])
 
+  function handleRemoveTask(taskId: number) {
+    const newTasks = tasks.filter((task) => taskId !== task.id);
+    setTasks(newTasks);
+  }
 
   return (
     <section className={styles.container}>
-
       <form
         onSubmit={handleSubmitAddTask}>
         <div>
@@ -59,7 +56,7 @@ export const Tasks: React.FC = () => {
             value={taskTitle} />
         </div>
 
-        <button
+        <button className={styles.btnAddTask}
           type='submit'
         >Adicionar</button>
       </form>
@@ -68,8 +65,14 @@ export const Tasks: React.FC = () => {
         {tasks.map((task) => {
           return (
             <li key={task.id}>
-              <input type="checkbox" id={`task-${task.id}`} />
-              <label htmlFor={`task-${task.id}`}>{task.title}</label>
+              <input
+                type="checkbox"
+                id={`task-${task.id}`}
+                onChange={() => handleToggleTaskStatus(task.id)}
+              />
+              <label className={task.done ? styles.done : ''} htmlFor={`task-${task.id}`}>{task.title}
+              </label>
+              <button onClick={() => { handleRemoveTask(task.id) }}>X</button>
             </li>
           )
         })}
