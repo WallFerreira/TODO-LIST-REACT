@@ -13,7 +13,7 @@ function App() {
 
     </TasksProvider>
   )
-}
+};
 
 export default App
 
